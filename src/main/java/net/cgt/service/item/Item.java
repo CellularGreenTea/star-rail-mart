@@ -1,9 +1,9 @@
 package net.cgt.service.item;
 
 public class Item {
-    private String code;
-    private String name;
-    private double price;
+    private final String code;
+    private final String name;
+    private final double price;
     private int stock;
 
     public Item(String code, String name, double price, int stock) {
@@ -27,6 +27,10 @@ public class Item {
 
     public int getStock() {
         return this.stock;
+    }
+
+    public void setStock(int newStock) {
+        this.stock = newStock;
     }
 
     @Override

@@ -6,15 +6,6 @@ import javax.swing.*;
 import javax.swing.plaf.basic.BasicScrollBarUI;
 import java.awt.*;
 
-class ScrollBarButton extends JButton {
-    // Hides the decrease and increase button for the scrollbar
-
-    public ScrollBarButton() {
-        setVisible(false);
-        setEnabled(false);
-    }
-}
-
 public class ModernScrollbar extends BasicScrollBarUI  {
     @Override
     protected JButton createDecreaseButton(int orientation) {
@@ -55,4 +46,6 @@ public class ModernScrollbar extends BasicScrollBarUI  {
         graphics2D.fillRoundRect(x, y, width, height, 10, 10);
         graphics2D.dispose();
     }
+
+
 }

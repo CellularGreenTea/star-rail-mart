@@ -1,19 +1,20 @@
-package net.cgt.iface.components.container.menu;
+package net.cgt.iface.components.container.payment;
 
 import net.cgt.iface.boilerplate.adapter.Mouse;
 import net.cgt.iface.boilerplate.components.RoundJPanel;
 import net.cgt.iface.boilerplate.graphics.AppLabel;
 import net.cgt.iface.boilerplate.graphics.FontType;
 import net.cgt.iface.boilerplate.graphics.Palette;
+import net.cgt.iface.components.container.menu.Menu;
 import net.miginfocom.swing.MigLayout;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
 
-public class Category extends RoundJPanel {
+public class Payment extends RoundJPanel {
     private final String label;
 
-    public Category(String label) {
+    public Payment(String label) {
         super(Palette.CLEAR.getColor(), 30, false);
 
         this.label = label;
@@ -25,26 +26,26 @@ public class Category extends RoundJPanel {
         addMouseListener(new Mouse() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if (MenuCategory.activeCategory != null && !MenuCategory.activeCategory.getLabel().equals(((Category) e.getComponent()).getLabel())) {
-                    MenuCategory.activeCategory.setBackgroundColor(super.getComponentColor());
-                    MenuCategory.activeCategory.setLabelColor(Palette.TEXT_GRAY.getColor());
+                if (PaymentOptions.activePaymentOption != null && !PaymentOptions.activePaymentOption.getLabel().equals(((Payment) e.getComponent()).getLabel())) {
+                    PaymentOptions.activePaymentOption.setBackgroundColor(super.getComponentColor());
+                    PaymentOptions.activePaymentOption.setLabelColor(Palette.TEXT_GRAY.getColor());
                 }
 
-                MenuCategory.activeCategory = (Category) e.getComponent();
-                MenuCategory.activeCategory.setBackgroundColor(Palette.SECONDARY.getColor());
-                MenuCategory.activeCategory.setLabelColor(Palette.TEXT_WHITE.getColor());
+                PaymentOptions.activePaymentOption = (Payment) e.getComponent();
+                PaymentOptions.activePaymentOption.setBackgroundColor(Palette.SECONDARY.getColor());
+                PaymentOptions.activePaymentOption.setLabelColor(Palette.TEXT_WHITE.getColor());
 
-                Menu.loadCategoryItems(MenuCategory.activeCategory.getLabel());
+                Menu.loadCategoryItems(PaymentOptions.activePaymentOption.getLabel());
             }
 
             @Override
             public void mouseEntered(MouseEvent e) {
                 super.mouseEntered(e);
 
-                Category c = (Category) e.getComponent();
+                Payment c = (Payment) e.getComponent();
 
-                if (MenuCategory.activeCategory == null ||
-                        !MenuCategory.activeCategory.getLabel().equals(c.getLabel())
+                if (PaymentOptions.activePaymentOption == null ||
+                        !PaymentOptions.activePaymentOption.getLabel().equals(c.getLabel())
                 ) {
                     super.setComponentColor(c.getBackgroundColor());
                     c.setLabelColor(Palette.TEXT_WHITE.getColor());
@@ -55,10 +56,10 @@ public class Category extends RoundJPanel {
             public void mouseExited(MouseEvent e) {
                 super.mouseExited(e);
 
-                Category c = (Category) e.getComponent();
+                Payment c = (Payment) e.getComponent();
 
-                if (MenuCategory.activeCategory == null ||
-                        !MenuCategory.activeCategory.getLabel().equals(c.getLabel())
+                if (PaymentOptions.activePaymentOption == null ||
+                        !PaymentOptions.activePaymentOption.getLabel().equals(c.getLabel())
                 ) {
                     c.setLabelColor(Palette.TEXT_GRAY.getColor());
                 }
@@ -76,5 +77,4 @@ public class Category extends RoundJPanel {
 
         label.repaint();
     }
-
 }

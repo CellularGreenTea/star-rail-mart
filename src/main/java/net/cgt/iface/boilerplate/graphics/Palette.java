@@ -13,6 +13,9 @@ public enum Palette {
     SECONDARY(Color.decode("#482d76")),
     SECONDARY_HIGHLIGHT(Color.decode("#1E172A")),
     ACCENT(Color.decode("#804ed0")),
+    GREEN(Color.decode("#3B7A57")),
+    GREEN_HIGHLIGHT(Color.decode("#29AB87")),
+    RED(Color.decode("#BF0A30")),
     CLEAR(new Color(0, 0, 0, 0));
 
     private final Color color;

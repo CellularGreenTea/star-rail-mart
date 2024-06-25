@@ -1,13 +1,11 @@
 package net.cgt.service.checkout;
 
-import java.sql.Connection;
-import java.sql.Statement;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
 import net.cgt.service.DB;
 import net.cgt.service.item.Item;
+
+import java.sql.*;
+import java.util.Collections;
+import java.util.Vector;
 
 public class CheckoutService {
     public Connection db;
@@ -17,20 +15,54 @@ public class CheckoutService {
     }
 
     public void addCheckoutItem(Item item) {
-        String injection = "INSERT INTO checkout(code, name, price, quantity) VALUES(?,?,?,?)";
+        String injection = "INSERT INTO checkout(number, code, name, price, quantity) VALUES(?,?,?,?,?)";
 
         try {
             PreparedStatement statement = db.prepareStatement(injection, Statement.RETURN_GENERATED_KEYS);
-            statement.setString(1, item.getCode());
-            statement.setString(2, item.getName());
-            statement.setDouble(3, item.getPrice());
-            statement.setInt(4, 1);
+            statement.setInt(1, getCheckoutItems().size() + 1);
+            statement.setString(2, item.getCode());
+            statement.setString(3, item.getName());
+            statement.setDouble(4, item.getPrice());
+            statement.setInt(5, 1);
 
             statement.executeUpdate();
         }
         catch (SQLException error) {
             error.printStackTrace();
         }
+    }
+
+    public Vector<Vector<Object>> getCheckoutItems() {
+        Vector<Vector<Object>> checkoutItems = new Vector<>();
+
+        String injection = "SELECT * FROM checkout ORDER BY number ASC";
+
+        try {
+            PreparedStatement statement = db.prepareStatement(injection);
+            ResultSet results = statement.executeQuery();
+
+            while (results.next()) {
+                Vector<Object> checklistItem = new Vector<>();
+
+                String[] item = new String[5];
+
+                item[0] = String.valueOf(results.getInt("number"));
+                item[1] = results.getString("code");
+                item[2] = results.getString("name");
+                item[3] = String.valueOf(results.getDouble("price"));
+                item[4] = String.valueOf(results.getInt("quantity"));
+
+                Collections.addAll(checklistItem, item);
+
+                checkoutItems.add(checklistItem);
+            }
+
+            return checkoutItems;
+        }
+        catch (SQLException error) {
+            error.printStackTrace();
+        }
+        return null;
     }
 
     public void updateCheckoutItemQuantity(Item item) {

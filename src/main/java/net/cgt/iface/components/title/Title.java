@@ -54,7 +54,7 @@ public class Title extends JPanel {
         container.setOpaque(false);
 
         menuTab = new Tab("Menu");
-        checkoutTab = new Tab("Checkout");
+        checkoutTab = new Tab("Payment");
         toolsTab = new Tab("Tools");
 
         container.add(menuTab);

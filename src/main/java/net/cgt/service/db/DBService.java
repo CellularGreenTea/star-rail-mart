@@ -51,6 +51,8 @@ public class DBService {
                 categoryItems.add(item);
             }
 
+            categoryItems.sort(new ItemsComparator());
+
             return categoryItems;
         }
 
@@ -63,7 +65,7 @@ public class DBService {
     public ArrayList<Item> getAllItems() {
         ArrayList<Item> items = new ArrayList<>();
 
-        String injection = "SELECT code, name, price, stock FROM items";
+        String injection = "SELECT * FROM items ORDER BY code ASC";
 
         try {
             PreparedStatement statement = db.prepareStatement(injection);
@@ -71,10 +73,11 @@ public class DBService {
 
             while (results.next()) {
                 Item item = new Item(results.getString("code"), results.getString("name"), results.getDouble("price"), results.getInt("stock"));
-
                 items.add(item);
             }
-        
+
+            items.sort(new ItemsComparator());
+
             return items;
         }
 
@@ -100,6 +103,8 @@ public class DBService {
 
                 filteredItems.add(item);
             }
+
+            filteredItems.sort(new ItemsComparator());
 
             return filteredItems;
         }
@@ -129,6 +134,8 @@ public class DBService {
 
                 filteredCategoryItems.add(item);
             }
+
+            filteredCategoryItems.sort(new ItemsComparator());
 
             return filteredCategoryItems;
         }

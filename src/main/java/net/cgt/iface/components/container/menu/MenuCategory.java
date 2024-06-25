@@ -19,15 +19,15 @@ public class MenuCategory extends RoundJPanel {
         setLayout(new MigLayout("align 50% 20%, flowy, fillx"));
 
         allCategory = new Category("All");
-        mealsCategory = new Category("Meals");
-        dessertsCategory = new Category("Desserts");
         beveragesCategory = new Category("Beverages");
+        dessertsCategory = new Category("Desserts");
+        mealsCategory = new Category("Meals");
         specialsCategory = new Category("Specials");
 
         add(allCategory, "growx");
-        add(mealsCategory, "growx");
-        add(dessertsCategory, "growx");
         add(beveragesCategory, "growx");
+        add(dessertsCategory, "growx");
+        add(mealsCategory, "growx");
         add(specialsCategory, "growx");
 
         fireAllMenuClick();

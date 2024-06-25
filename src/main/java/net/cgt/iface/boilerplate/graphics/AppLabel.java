@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 
 public class AppLabel extends JLabel {
+    private String label;
+
     private static class CustomFontWrapper extends Font {
         public CustomFontWrapper(int size, String fontName) {
             super(fontName, Font.PLAIN, size);
@@ -13,6 +15,8 @@ public class AppLabel extends JLabel {
     public AppLabel(String label, Color color, int size, FontType fontType) {
         super();
 
+        this.label = label;
+
         String font = "";
 
         switch (fontType) {
@@ -21,9 +25,18 @@ public class AppLabel extends JLabel {
             case FontType.BOLD -> font = "Inter Bold";
         }
 
-        setText(label);
+        setText(this.label);
         setForeground(color);
         setFont(new CustomFontWrapper(size, font));
     }
+
+    public String getLabel() {
+        return this.label;
+    }
+
+    public void setLabel(String label) {
+        this.label = label;
+    }
+
 }
 

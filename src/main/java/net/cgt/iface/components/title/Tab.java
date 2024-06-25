@@ -36,8 +36,8 @@ public class Tab extends BoundRoundJPanel {
 
                 if (Title.activeTabSelection.getLabel().equals("Menu")) {
                     ApplicationWindow.container.navToMenu();
-                } else if (Title.activeTabSelection.getLabel().equals("Checkout")) {
-                    ApplicationWindow.container.navToCheckout();
+                } else if (Title.activeTabSelection.getLabel().equals("Payment")) {
+                    ApplicationWindow.container.navToPayment();
                 } else {
                     ApplicationWindow.container.navToTools();
                 }
